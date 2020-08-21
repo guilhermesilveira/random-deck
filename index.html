@@ -1,0 +1,161 @@
+<html>
+    <head>
+        <!-- Gerador justo aleatório por Guilherme Silveira -->
+        <meta charset="UTF-16">
+        <title>Random deck</title>
+    </head>
+    <style>
+        #content {
+            height: 100vh;
+        }
+        #top {
+            height: 10vh;
+        }
+        #cards {
+            height: 90vh;
+            font-size: 80vh;
+        }
+        #all-cards {
+            font-size: 10vh;
+        }
+        #hidden-cards {
+            display: none;
+        }
+    </style>
+    <body>
+        <div id="content">
+            <div id="top">
+                <h1>One shuffled deck</h1>
+                <span id="current-card-description">54 cards left</span>
+                <button id="next-card-button">Next card</button>
+            </div>
+            <div id="cards">
+                <span id="next-card" style="color:blue">&#x1F0A0</span>
+                <span id="card"></span>
+            </div>
+            <div id="bottom">
+                Your cards:
+            </div>
+            <span id="all-cards"></span>
+            <div id="hidden-cards">
+                <span id="cards-A">
+                    <span>&#x1F0A1</span>
+                    <span>&#x1F0A2</span>
+                    <span>&#x1F0A3</span>
+                    <span>&#x1F0A4</span>
+                    <span>&#x1F0A5</span>
+                    <span>&#x1F0A6</span>
+                    <span>&#x1F0A7</span>
+                    <span>&#x1F0A8</span>
+                    <span>&#x1F0A9</span>
+                    <span>&#x1F0AA</span>
+                    <span>&#x1F0AB</span>
+                    <span>&#x1F0AD</span>
+                    <span>&#x1F0AE</span>
+                </span>
+                <span id="cards-B">
+                    <span style="color:red">&#x1F0B1</span>
+                    <span style="color:red">&#x1F0B2</span>
+                    <span style="color:red">&#x1F0B3</span>
+                    <span style="color:red">&#x1F0B4</span>
+                    <span style="color:red">&#x1F0B5</span>
+                    <span style="color:red">&#x1F0B6</span>
+                    <span style="color:red">&#x1F0B7</span>
+                    <span style="color:red">&#x1F0B8</span>
+                    <span style="color:red">&#x1F0B9</span>
+                    <span style="color:red">&#x1F0BA</span>
+                    <span style="color:red">&#x1F0BB</span>
+                    <span style="color:red">&#x1F0BD</span>
+                    <span style="color:red">&#x1F0BE</span>
+                </span>
+                <span id="cards-C">
+                    <span style="color:red">&#x1F0C1</span>
+                    <span style="color:red">&#x1F0C2</span>
+                    <span style="color:red">&#x1F0C3</span>
+                    <span style="color:red">&#x1F0C4</span>
+                    <span style="color:red">&#x1F0C5</span>
+                    <span style="color:red">&#x1F0C6</span>
+                    <span style="color:red">&#x1F0C7</span>
+                    <span style="color:red">&#x1F0C8</span>
+                    <span style="color:red">&#x1F0C9</span>
+                    <span style="color:red">&#x1F0CA</span>
+                    <span style="color:red">&#x1F0CB</span>
+                    <span style="color:red">&#x1F0CD</span>
+                    <span style="color:red">&#x1F0CE</span>
+                </span>
+                <span id="cards-D">
+                    <span>&#x1F0D1</span>
+                    <span>&#x1F0D2</span>
+                    <span>&#x1F0D3</span>
+                    <span>&#x1F0D4</span>
+                    <span>&#x1F0D5</span>
+                    <span>&#x1F0D6</span>
+                    <span>&#x1F0D7</span>
+                    <span>&#x1F0D8</span>
+                    <span>&#x1F0D9</span>
+                    <span>&#x1F0DA</span>
+                    <span>&#x1F0DB</span>
+                    <span>&#x1F0DD</span>
+                    <span>&#x1F0DE</span>
+                </span>
+                <span id="cards-J1" style="color:black">&#x1F0DF</span>
+                <span id="cards-J2" style="color:black">&#x1F0DF</span>
+                </div>
+        </div>
+        <script>
+            // From https://github.com/Daplie/knuth-shuffle
+            function shuffle(array) {
+                var currentIndex = array.length, temporaryValue, randomIndex;
+
+                // While there remain elements to shuffle...
+                while (0 !== currentIndex) {
+
+                    // Pick a remaining element...
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex -= 1;
+
+                    // And swap it with the current element.
+                    temporaryValue = array[currentIndex];
+                    array[currentIndex] = array[randomIndex];
+                    array[randomIndex] = temporaryValue;
+                }
+
+                return array;
+            }
+
+            var cards = [];
+            for(var i = 0; i < 13; i++) {
+                cards.push(document.getElementById("cards-A").children[i].cloneNode(true));
+                cards.push(document.getElementById("cards-B").children[i].cloneNode(true));
+                cards.push(document.getElementById("cards-C").children[i].cloneNode(true));
+                cards.push(document.getElementById("cards-D").children[i].cloneNode(true));
+            }
+            cards.push(document.getElementById("cards-J1").cloneNode(true));
+            cards.push(document.getElementById("cards-J2").cloneNode(true));
+            shuffle(cards);
+            console.log(cards);
+
+            // all_cards = document.createElement('span');
+            for(var card in cards) {
+                document.getElementById("all-cards").appendChild(cards[card]);
+            }
+
+            var currentCard = -1;
+            function nextCard() {
+                currentCard++;
+                console.log("moving to card #" + currentCard);
+                if(currentCard==53) {
+                    document.getElementById("next-card-button").style.display = "none";
+                    document.getElementById("next-card").style.display = "none";
+                }
+                document.getElementById("current-card-description").innerHTML = (54 - currentCard - 1) + " cards left";
+                // TODO mostra quantas faltam
+                // TODO mostra onde clicar
+                let card = cards[currentCard].cloneNode(true);
+                document.getElementById("card").innerHTML = "";
+                document.getElementById("card").appendChild(card.cloneNode(true));
+            }
+            document.getElementById("next-card-button").onclick = nextCard;
+        </script>
+    </body>
+</html>
