@@ -57,7 +57,7 @@
         <div id="content">
             <div id="top">
                 <h1>One shuffled deck</h1>
-                <span id="current-card-description">53 cards left</span>
+                <span id="current-card-description">1 / 54 cards</span>
                 <button id="next-card-button">Next card</button>
             </div>
             <div id="cards">
@@ -155,7 +155,6 @@
 
             function fullCard(card) {
                 const backFace = document.querySelector(".top-card").cloneNode(true);
-                // backFace.style.display = "none";
 
                 const span = document.createElement("span");
                 span.classList.add("full-card");
@@ -177,23 +176,23 @@
             shuffle(cards);
             // console.log(cards);
 
-            // all_cards = document.createElement('span');
             for(var card in cards) {
                 var element = cards[card];
                 document.querySelector(".pile").appendChild(fullCard(element));
             }
 
-            var currentCard = -1;
+            var currentCard = 0;
             function nextCard() {
-                currentCard++;
                 // console.log("moving to card #" + currentCard);
                 if(currentCard==52) {
-                    document.getElementById("next-card-button").style.display = "none";
-                    document.getElementById("next-card").style.display = "none";
+                    document.querySelector("#next-card-button").style.display = "none";
+                    document.querySelector("#next-card").style.display = "none";
                 }
-                document.getElementById("current-card-description").innerHTML = (53 - currentCard - 1) + " cards left";
+                document.querySelector("#current-card-description").innerHTML = (currentCard + 2) + " / 54 cards";
 
-                const card = document.querySelector(".pile").children[currentCard];
+                const pile = document.querySelector(".pile");
+
+                const card = pile.children[currentCard];
                 card.classList.add('magictime', 'perspectiveLeft');
 
                 function switchFace() {
@@ -202,17 +201,19 @@
                 }
                 setTimeout(switchFace, 350);
 
+                const nextCard = pile.children[currentCard + 1];
                 function showNext() {
-                    const nextCard = document.querySelector(".pile").children[currentCard + 1];
                     nextCard.style.display = "block";
                 }
                 setTimeout(showNext, 200);
 
+                currentCard++;
 
             }
             document.getElementById("next-card-button").onclick = nextCard;
+
             var firstCard = document.querySelector(".pile").children[0];
-            firstCard.style.display="block";
+            firstCard.style.display = "block";
 
         </script>
     </body>
