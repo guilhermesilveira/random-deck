@@ -3,10 +3,19 @@
         <!-- Gerador justo aleatório por Guilherme Silveira -->
         <meta charset="UTF-16">
         <title>Random deck</title>
+        <!-- https://www.minimamente.com/project/magic/-->
+        <link rel="stylesheet" href="magic.css">
     </head>
     <style>
+        body {
+            background-color: #38383b;
+            color: #fff;
+        }
         #content {
             height: 100vh;
+            text-align: center;
+            font-family: orpheus-pro;
+            font-weight: 400;
         }
         #top {
             height: 10vh;
@@ -15,10 +24,32 @@
             height: 90vh;
             font-size: 80vh;
         }
-        #all-cards {
-            font-size: 10vh;
-        }
         #hidden-cards {
+            display: none;
+        }
+        .card-pile {
+            position: absolute;
+        }
+        .card-pile .single-card {
+            top: 0;
+            position: absolute;
+        }
+        .top-card {
+            position: absolute;
+            top: 0;
+            left: 0px;
+        }
+        .full-card {
+            position: absolute;
+            top: 0;
+            left: 0px;
+        }
+        .pile {
+            top: 0;
+            left: 10px;
+            position: absolute;
+        }
+        .full-card {
             display: none;
         }
     </style>
@@ -26,80 +57,79 @@
         <div id="content">
             <div id="top">
                 <h1>One shuffled deck</h1>
-                <span id="current-card-description">54 cards left</span>
+                <span id="current-card-description">53 cards left</span>
                 <button id="next-card-button">Next card</button>
             </div>
             <div id="cards">
-                <span id="next-card" style="color:blue">&#x1F0A0</span>
+                <span class="card-pile">
+                    <span class="top-card" style="display: none">&#x1F0A0</span>
+                    <span class="pile"></span>
+                </span>
                 <span id="card"></span>
             </div>
-            <div id="bottom">
-                Your cards:
-            </div>
-            <span id="all-cards"></span>
             <div id="hidden-cards">
                 <span id="cards-A">
-                    <span>&#x1F0A1</span>
-                    <span>&#x1F0A2</span>
-                    <span>&#x1F0A3</span>
-                    <span>&#x1F0A4</span>
-                    <span>&#x1F0A5</span>
-                    <span>&#x1F0A6</span>
-                    <span>&#x1F0A7</span>
-                    <span>&#x1F0A8</span>
-                    <span>&#x1F0A9</span>
-                    <span>&#x1F0AA</span>
-                    <span>&#x1F0AB</span>
-                    <span>&#x1F0AD</span>
-                    <span>&#x1F0AE</span>
+                    <span class="single-card">&#x1F0A1</span>
+                    <span class="single-card">&#x1F0A2</span>
+                    <span class="single-card">&#x1F0A3</span>
+                    <span class="single-card">&#x1F0A4</span>
+                    <span class="single-card">&#x1F0A5</span>
+                    <span class="single-card">&#x1F0A6</span>
+                    <span class="single-card">&#x1F0A7</span>
+                    <span class="single-card">&#x1F0A8</span>
+                    <span class="single-card">&#x1F0A9</span>
+                    <span class="single-card">&#x1F0AA</span>
+                    <span class="single-card">&#x1F0AB</span>
+                    <span class="single-card">&#x1F0AD</span>
+                    <span class="single-card">&#x1F0AE</span>
                 </span>
                 <span id="cards-B">
-                    <span style="color:red">&#x1F0B1</span>
-                    <span style="color:red">&#x1F0B2</span>
-                    <span style="color:red">&#x1F0B3</span>
-                    <span style="color:red">&#x1F0B4</span>
-                    <span style="color:red">&#x1F0B5</span>
-                    <span style="color:red">&#x1F0B6</span>
-                    <span style="color:red">&#x1F0B7</span>
-                    <span style="color:red">&#x1F0B8</span>
-                    <span style="color:red">&#x1F0B9</span>
-                    <span style="color:red">&#x1F0BA</span>
-                    <span style="color:red">&#x1F0BB</span>
-                    <span style="color:red">&#x1F0BD</span>
-                    <span style="color:red">&#x1F0BE</span>
+                    <span class="single-card" style="color:white">&#x1F0B1</span>
+                    <span class="single-card" style="color:white">&#x1F0B2</span>
+                    <span class="single-card" style="color:white">&#x1F0B3</span>
+                    <span class="single-card" style="color:white">&#x1F0B4</span>
+                    <span class="single-card" style="color:white">&#x1F0B5</span>
+                    <span class="single-card" style="color:white">&#x1F0B6</span>
+                    <span class="single-card" style="color:white">&#x1F0B7</span>
+                    <span class="single-card" style="color:white">&#x1F0B8</span>
+                    <span class="single-card" style="color:white">&#x1F0B9</span>
+                    <span class="single-card" style="color:white">&#x1F0BA</span>
+                    <span class="single-card" style="color:white">&#x1F0BB</span>
+                    <span class="single-card" style="color:white">&#x1F0BD</span>
+                    <span class="single-card" style="color:white">&#x1F0BE</span>
                 </span>
                 <span id="cards-C">
-                    <span style="color:red">&#x1F0C1</span>
-                    <span style="color:red">&#x1F0C2</span>
-                    <span style="color:red">&#x1F0C3</span>
-                    <span style="color:red">&#x1F0C4</span>
-                    <span style="color:red">&#x1F0C5</span>
-                    <span style="color:red">&#x1F0C6</span>
-                    <span style="color:red">&#x1F0C7</span>
-                    <span style="color:red">&#x1F0C8</span>
-                    <span style="color:red">&#x1F0C9</span>
-                    <span style="color:red">&#x1F0CA</span>
-                    <span style="color:red">&#x1F0CB</span>
-                    <span style="color:red">&#x1F0CD</span>
-                    <span style="color:red">&#x1F0CE</span>
+                    <span class="single-card" style="color:white">&#x1F0C1</span>
+                    <span class="single-card" style="color:white">&#x1F0C2</span>
+                    <span class="single-card" style="color:white">&#x1F0C3</span>
+                    <span class="single-card" style="color:white">&#x1F0C4</span>
+                    <span class="single-card" style="color:white">&#x1F0C5</span>
+                    <span class="single-card" style="color:white">&#x1F0C6</span>
+                    <span class="single-card" style="color:white">&#x1F0C7</span>
+                    <span class="single-card" style="color:white">&#x1F0C8</span>
+                    <span class="single-card" style="color:white">&#x1F0C9</span>
+                    <span class="single-card" style="color:white">&#x1F0CA</span>
+                    <span class="single-card" style="color:white">&#x1F0CB</span>
+                    <span class="single-card" style="color:white">&#x1F0CD</span>
+                    <span class="single-card" style="color:white">&#x1F0CE</span>
                 </span>
-                <span id="cards-D">
-                    <span>&#x1F0D1</span>
-                    <span>&#x1F0D2</span>
-                    <span>&#x1F0D3</span>
-                    <span>&#x1F0D4</span>
-                    <span>&#x1F0D5</span>
-                    <span>&#x1F0D6</span>
-                    <span>&#x1F0D7</span>
-                    <span>&#x1F0D8</span>
-                    <span>&#x1F0D9</span>
-                    <span>&#x1F0DA</span>
-                    <span>&#x1F0DB</span>
-                    <span>&#x1F0DD</span>
-                    <span>&#x1F0DE</span>
+                <span class="single-card" id="cards-D">
+                    <span class="single-card">&#x1F0D1</span>
+                    <span class="single-card">&#x1F0D2</span>
+                    <span class="single-card">&#x1F0D3</span>
+                    <span class="single-card">&#x1F0D4</span>
+                    <span class="single-card">&#x1F0D5</span>
+                    <span class="single-card">&#x1F0D6</span>
+                    <span class="single-card">&#x1F0D7</span>
+                    <span class="single-card">&#x1F0D8</span>
+                    <span class="single-card">&#x1F0D9</span>
+                    <span class="single-card">&#x1F0DA</span>
+                    <span class="single-card">&#x1F0DB</span>
+                    <span class="single-card">&#x1F0DD</span>
+                    <span class="single-card">&#x1F0DE</span>
                 </span>
-                <span id="cards-J1" style="color:black">&#x1F0DF</span>
-                <span id="cards-J2" style="color:black">&#x1F0DF</span>
+                <span class="single-card" id="cards-J1" style="color:white">&#x1F0DF</span>
+                <span class="single-card" id="cards-J2" style="color:white">&#x1F0DF</span>
                 </div>
         </div>
         <script>
@@ -123,6 +153,18 @@
                 return array;
             }
 
+            function fullCard(card) {
+                const backFace = document.querySelector(".top-card").cloneNode(true);
+                // backFace.style.display = "none";
+
+                const span = document.createElement("span");
+                span.classList.add("full-card");
+
+                span.appendChild(card);
+                span.appendChild(backFace);
+                return span;
+            }
+
             var cards = [];
             for(var i = 0; i < 13; i++) {
                 cards.push(document.getElementById("cards-A").children[i].cloneNode(true));
@@ -133,29 +175,45 @@
             cards.push(document.getElementById("cards-J1").cloneNode(true));
             cards.push(document.getElementById("cards-J2").cloneNode(true));
             shuffle(cards);
-            console.log(cards);
+            // console.log(cards);
 
             // all_cards = document.createElement('span');
             for(var card in cards) {
-                document.getElementById("all-cards").appendChild(cards[card]);
+                var element = cards[card];
+                document.querySelector(".pile").appendChild(fullCard(element));
             }
 
             var currentCard = -1;
             function nextCard() {
                 currentCard++;
-                console.log("moving to card #" + currentCard);
-                if(currentCard==53) {
+                // console.log("moving to card #" + currentCard);
+                if(currentCard==52) {
                     document.getElementById("next-card-button").style.display = "none";
                     document.getElementById("next-card").style.display = "none";
                 }
-                document.getElementById("current-card-description").innerHTML = (54 - currentCard - 1) + " cards left";
-                // TODO mostra quantas faltam
-                // TODO mostra onde clicar
-                let card = cards[currentCard].cloneNode(true);
-                document.getElementById("card").innerHTML = "";
-                document.getElementById("card").appendChild(card.cloneNode(true));
+                document.getElementById("current-card-description").innerHTML = (53 - currentCard - 1) + " cards left";
+
+                const card = document.querySelector(".pile").children[currentCard];
+                card.classList.add('magictime', 'perspectiveLeft');
+
+                function switchFace() {
+                    card.querySelector('.single-card').style.display = "none";
+                    card.querySelector('.top-card').style.display = "block";
+                }
+                setTimeout(switchFace, 350);
+
+                function showNext() {
+                    const nextCard = document.querySelector(".pile").children[currentCard + 1];
+                    nextCard.style.display = "block";
+                }
+                setTimeout(showNext, 200);
+
+
             }
             document.getElementById("next-card-button").onclick = nextCard;
+            var firstCard = document.querySelector(".pile").children[0];
+            firstCard.style.display="block";
+
         </script>
     </body>
 </html>
